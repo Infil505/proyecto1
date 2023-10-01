@@ -28,6 +28,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Limpiar el formulario
         appointmentForm.reset();
 
+      
+        alert('Cita agendada con éxito. ¡Gracias!');
+
         // Redireccionar a la página de "Mis Citas"
         window.location.href = "appointments.html";
     });
