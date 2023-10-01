@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", function () {
             localStorage.setItem("users", JSON.stringify(usersDB));
             alert("Registro exitoso. Ahora puede iniciar sesión.");
             registrationForm.reset();
+
+            window.location.href = "login.html";
+
         }
     });
 });
