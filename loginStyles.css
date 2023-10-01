@@ -30,7 +30,7 @@
 
 #login-form button {
     padding: 10px 20px;
-    background-color: #b9c0c7;
+    background-color: rgb(255, 68, 68);
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -39,7 +39,7 @@
 }
 
 #login-form button:hover {
-    background-color: #63686d;
+    background-color: #8f2121;
 }
 h2 {
     margin-bottom: 20px;
