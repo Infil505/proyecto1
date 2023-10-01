@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="stylesApp.css">
     <title>Citas</title>
 </head>
 <body>
@@ -16,14 +16,23 @@
             <li><a href="appointments.html">Mis Citas</a></li>
         </ul>
     </nav>
-
     <div class="appointments-container">
         <h2>Mis Citas</h2>
-        <ul id="appointments-list">
-            <!-- Las citas agendadas se mostrarán aquí -->
-        </ul>
+        <table id="appointments-table">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Barbero</th>
+                    <th>Corte</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Las citas agendadas se mostrarán aquí -->
+            </tbody>
+        </table>
     </div>
-
     <script src="appointments.js"></script>
 </body>
 </html>
+
