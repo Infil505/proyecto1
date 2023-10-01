@@ -1,6 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const usersDB = JSON.parse(localStorage.getItem("users")) || []; // Obtener datos de usuarios desde el localStorage
 
+document.addEventListener("DOMContentLoaded", function () {
+
+    const usersDB = JSON.parse(localStorage.getItem("users")) || []; // Obtener datos de usuarios desde el localStorage
     const loginForm = document.getElementById("login-form");
 
     loginForm.addEventListener("submit", function (e) {
