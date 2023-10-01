@@ -25,4 +25,3 @@ document.addEventListener("DOMContentLoaded", function () {
     // Cargar y mostrar las citas agendadas al cargar la página
     loadAppointments();
 });
-
