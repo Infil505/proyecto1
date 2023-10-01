@@ -44,7 +44,8 @@ nav ul li a:hover {
 h1 {
     background-color: #233558; /* Azul medio */
     color: #fff;
-    padding: 10px;
+    padding: 15px;
+    font-size: 28px;
 }
 
 /* Estilos para la tabla */
