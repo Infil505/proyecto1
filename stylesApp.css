@@ -1,0 +1,89 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
+
+/* Estilos para la barra de navegación */
+nav {
+    background-color: #2e3d58; /* Azul medio */
+    color: #fff;
+    padding: 10px;
+    margin-top: 0;
+    height: 55px;
+    display: flex;
+    justify-content: center; /* Alineación horizontal al centro */
+    align-items: center; /* Alineación vertical al centro */
+}
+
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Alineación horizontal al centro */
+}
+
+nav ul li {
+    margin-right: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    background-color: #1c1c1c; /* Azul oscuro */
+    color: #fff;
+    border-radius: 5px; /* Redondeado al hacer hover */
+}
+
+/* Estilos para el encabezado de la página */
+h2 {
+    background-color: #2e3d58; /* Azul medio */
+    color: #fff;
+    padding: 10px;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #1c1c1c; /* Azul oscuro */
+}
+
+th {
+    background-color: #2e3d58; /* Azul medio */
+    color: #fff;
+}
+
+/* Estilos para los botones de carga y eliminación de citas */
+.load-button, .delete-button {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 5px; /* Redondeado */
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.load-button {
+    background-color: #2e3d58; /* Azul medio */
+}
+
+.delete-button {
+    background-color: #1c1c1c; /* Azul oscuro */
+}
+
+.load-button:hover, .delete-button:hover {
+    opacity: 0.8; /* Opacidad al hacer hover */
+}
