@@ -3,45 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="alondra.css">
     <title>Agendar Cita</title>
     <link rel="icon" type="image/x-icon" href="img/42527barberpole_98947.png">
 </head>
 <body>
+<<<<<<< HEAD
     <nav>
         <ul>
+          
+=======
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #808080;">
+        <ul class="navbar-nav">
             <li><a href="index.html">Inicio</a></li>
             <li><a href="appointment.html">Agendar Cita</a></li>
             <li><a href="appointments.html">Desplegar citas</a></li>
             <li><a href="login.html">Cerrar sesion</a></li>
+>>>>>>> 02e6fe36f83844523e72d8e4a30a087448609d1b
         </ul>
     </nav>
 
-    <div class="appointment-container">
+    <div class="container mt-4">
         <h2>Agendar Cita</h2>
         <form id="appointment-form">
-            <label for="customer-name">Nombre del Cliente:</label>
-            <input type="text" id="customer-name" placeholder="Nombre del Cliente" required>
+            <div class="form-group">
+                <label for="customer-name">Nombre del Cliente:</label>
+                <input type="text" class="form-control" id="customer-name" placeholder="Nombre del Cliente" required>
+            </div>
 
-            <label for="barber">Barbero:</label>
-            <select id="barber" title="Selecciona un barbero" required>
-                <option value="barber1">Barbero 1</option>
-                <option value="barber2">Barbero 2</option>
-            </select>
+            <div class="form-group">
+                <label for="barber">Barbero:</label>
+                <select class="form-control" id="barber" title="Selecciona un barbero" required>
+                    <option value="barber1">Barbero 1</option>
+                    <option value="barber2">Barbero 2</option>
+                </select>
+            </div>
 
-            <label for="haircut">Tipo de Corte:</label>
-            <select id="haircut" title="Selecciona un tipo de corte" required>
-                <option value="cut1">Corte 1</option>
-                <option value="cut2">Corte 2</option>
-            </select>
+            <div class="form-group">
+                <label for="haircut">Tipo de Corte:</label>
+                <select class="form-control" id="haircut" title="Selecciona un tipo de corte" required>
+                    <option value="cut1">Corte 1</option>
+                    <option value="cut2">Corte 2</option>
+                </select>
+            </div>
 
-            <label for="appointment-date">Fecha de la Cita:</label>
-            <input type="date" id="appointment-date" title="Selecciona una fecha para la cita" required>
+            <div class="form-group">
+                <label for="appointment-date">Fecha de la Cita:</label>
+                <input type="date" class="form-control" id="appointment-date" title="Selecciona una fecha para la cita" required>
+            </div>
 
-            <button type="submit">Agendar Cita</button>
+            <button type="submit" class="btn btn-primary" name="btnAgendarCita">Agendar Cita</button>
         </form>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="appointment.js"></script>
 </body>
 </html>
