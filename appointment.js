@@ -1,5 +1,27 @@
 document.addEventListener("DOMContentLoaded", function () {
     const appointmentForm = document.getElementById("appointment-form");
+    const maxAppointmentsPerDay = 8; // Número máximo de citas por día
+
+    function getAppointmentsForBarberOnDate(barber, date) {
+        return JSON.parse(localStorage.getItem("appointments") || []).filter(appointment => (
+            appointment.barber === barber && appointment.appointmentDate === date
+        ));
+    }
+
+    function showAlert(message) {
+        alert(message);
+    }
+
+    function addAppointmentToLocalStorage(appointment) {
+        const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
+        storedAppointments.push(appointment);
+        localStorage.setItem("appointments", JSON.stringify(storedAppointments));
+    }
+
+    function isDateValid(selectedDate) {
+        const currentDate = new Date();
+        return selectedDate >= currentDate;
+    }
 
     appointmentForm.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -8,77 +30,66 @@ document.addEventListener("DOMContentLoaded", function () {
         const haircut = document.getElementById("haircut").value;
         const appointmentDate = document.getElementById("appointment-date").value;
 
-        const appointment = {
-            customerName,
-            barber,
-            haircut,
-            appointmentDate
-        };
+        const selectedDate = new Date(appointmentDate);
 
-        const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
+        if (!isDateValid(selectedDate)) {
+            showAlert('No puedes agendar citas en fechas anteriores a la actual.');
+        } else {
+            const appointmentsForBarberAndDate = getAppointmentsForBarberOnDate(barber, appointmentDate);
 
-        storedAppointments.push(appointment);
-
-        localStorage.setItem("appointments", JSON.stringify(storedAppointments));
-
-        appointmentForm.reset();
-
-        alert('Cita agendada con éxito. ¡Gracias!');
-
-        window.location.href = "appointments.html";
+            if (appointmentsForBarberAndDate.length >= maxAppointmentsPerDay) {
+                showAlert('El barbero ya tiene el máximo de citas para este día. Por favor, elige otra fecha u otro barbero.');
+            } else {
+                const appointment = { customerName, barber, haircut, appointmentDate };
+                addAppointmentToLocalStorage(appointment);
+                appointmentForm.reset();
+                showAlert('Cita agendada con éxito. ¡Gracias!');
+                window.location.href = "appointments.html";
+            }
+        }
     });
+
+    const barberSelect = createSelect("barber", "Selecciona un barbero", true, [
+        "Luis Gonzales",
+        "Daniel Mendez",
+        "Maria Rodriguez",
+        "Carlos Martinez",
+        "Ana Lopez"
+    ]);
+
+    const haircutSelect = createSelect("haircut", "Selecciona un tipo de corte", true, [
+        "Corte Pixie",
+        "Corte Bob",
+        "Corte Fade",
+        "Corte Undercut",
+        "Corte Mohawk",
+        "Corte Shag",
+        "Corte Taper",
+        "Corte Long Bob",
+        "Corte de Pelo Rizado",
+        "Corte de Pelo Largo",
+        "Corte de Pelo Corto"
+    ]);
+
+    document.getElementById("barber-container").appendChild(barberSelect);
+    document.getElementById("haircut-container").appendChild(haircutSelect);
 });
 
-const barberContainer = document.getElementById("barber-container");
-const haircutContainer = document.getElementById("haircut-container");
+function createSelect(id, title, required, optionsArray) {
+    const select = document.createElement("select");
+    select.classList.add("form-control");
+    select.id = id;
+    select.title = title;
+    select.required = required;
 
-const barberSelect = document.createElement("select");
-barberSelect.classList.add("form-control");
-barberSelect.id = "barber";
-barberSelect.title = "Selecciona un barbero";
-barberSelect.required = true;
+    optionsArray.forEach(optionText => {
+        const optionElement = document.createElement("option");
+        optionElement.value = optionText;
+        optionElement.textContent = optionText;
+        select.appendChild(optionElement);
+    });
 
-const barberOptions = [
-    "Luis Gonzales",
-    "Daniel Mendez",
-    "Maria Rodriguez",
-    "Carlos Martinez",
-    "Ana Lopez"
-];
-barberOptions.forEach(option => {
-    const optionElement = document.createElement("option");
-    optionElement.value = option;
-    optionElement.textContent = option;
-    barberSelect.appendChild(optionElement);
-});
+    return select;
+}
 
-const haircutSelect = document.createElement("select");
-haircutSelect.classList.add("form-control");
-haircutSelect.id = "haircut";
-haircutSelect.title = "Selecciona un tipo de corte";
-haircutSelect.required = true;
-
-const haircutOptions = [
-    "Corte Pixie",
-    "Corte Bob",
-    "Corte Fade",
-    "Corte Undercut",
-    "Corte Mohawk",
-    "Corte Shag",
-    "Corte Taper",
-    "Corte Long Bob",
-    "Corte de Pelo Rizado",
-    "Corte de Pelo Largo",
-    "Corte de Pelo Corto"
-];
-haircutOptions.forEach(option => {
-    const optionElement = document.createElement("option");
-    optionElement.value = option;
-    optionElement.textContent = option;
-    haircutSelect.appendChild(optionElement);
-});
-
-
-barberContainer.appendChild(barberSelect);
-haircutContainer.appendChild(haircutSelect);
 
