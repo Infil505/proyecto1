@@ -18,6 +18,20 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("users", JSON.stringify(usersDB));
     }
 
+    userTypeSelect.addEventListener("change", function () {
+        const selectedOption = userTypeSelect.value;
+        const passwordValidationLabel = document.getElementById("reg-password-validation");
+        const passwordValidationInput = document.getElementById("reg-password-validation");
+
+        if (selectedOption === "empleado") {
+            passwordValidationLabel.style.display = "block";
+            passwordValidationInput.style.display = "block";
+        } else {
+            passwordValidationLabel.style.display = "none";
+            passwordValidationInput.style.display = "none";
+        }
+    });
+
     registrationForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const username = document.getElementById("reg-username").value;
@@ -25,7 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const password = passwordField.value;
         const email = document.getElementById("reg-email").value;
         const userType = userTypeSelect.value;
-        const entered = userType === "empleado" ? prompt("Por favor, verifique su identidad de administrador con su clave de acceso al sistema") : "";
+
+        let entered = "";
+
+        if (userType === "empleado") {
+            const passwordValidationInput = document.getElementById("reg-password-validation");
+            entered = passwordValidationInput.value;
+        }
 
         if (usersDB.some(user => user.username === username)) {
             showAlert("El usuario ya existe. Por favor, elija otro nombre de usuario.");
@@ -39,11 +59,11 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Cambiar el tipo de entrada a contraseña al enfocar el campo de contraseña
     const passwordField = document.getElementById("reg-password");
     passwordField.addEventListener("focus", function () {
         passwordField.type = "password";
     });
 });
+
 
 
