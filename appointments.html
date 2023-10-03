@@ -7,6 +7,38 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="img/42527barberpole_98947.png">
     <title>Citas</title>
+    <style>
+        /* Estilos para el botón de eliminar */
+        #delete-button {
+            background-color: crimson;
+            color: blanchedalmond;
+            border: none;
+            border-radius: 25px; /* Valor ajustable para redondear las esquinas */
+            padding: 10px 20px; /* Ajusta el espaciado interior del botón según tus preferencias */
+            cursor: pointer;
+        }
+
+        /* Estilos para el botón de eliminar al pasar el ratón sobre él */
+        #delete-button:hover {
+            background-color: darkred;
+        }
+
+        /* Estilos para el botón de eliminar al hacer clic */
+        #delete-button:active {
+            background-color: firebrick;
+        }
+
+        /* Estilos adicionales */
+        .appointments-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #appointments-table {
+            background-color: rgba(254, 254, 254, 0.8);
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -20,13 +52,15 @@
     <div class="appointments-container">
         <br>
         <h1><center>Citas</center></h1>
-        <table style=" background-color: rgba(254, 254, 254, 0.8);" id="appointments-table">
+        <button id="delete-button">Eliminar</button>
+        <table id="appointments-table">
             <thead>
                 <tr>
                     <th>Cliente</th>
                     <th>Barbero</th>
                     <th>Corte</th>
                     <th>Fecha</th>
+                    <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,4 +71,3 @@
     <script src="appointments.js"></script>
 </body>
 </html>
-
