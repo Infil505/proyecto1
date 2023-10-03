@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const haircut = document.getElementById("haircut").value;
         const appointmentDate = document.getElementById("appointment-date").value;
 
-        // Crear un objeto de cita
         const appointment = {
             customerName,
             barber,
@@ -16,23 +15,70 @@ document.addEventListener("DOMContentLoaded", function () {
             appointmentDate
         };
 
-        // Obtener citas agendadas del localStorage o crear un array vacío si no existe
         const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
 
-        // Agregar la nueva cita al array de citas
         storedAppointments.push(appointment);
 
-        // Guardar las citas actualizadas en el localStorage
         localStorage.setItem("appointments", JSON.stringify(storedAppointments));
 
-        // Limpiar el formulario
         appointmentForm.reset();
 
-      
         alert('Cita agendada con éxito. ¡Gracias!');
 
-        // Redireccionar a la página de "Mis Citas"
         window.location.href = "appointments.html";
     });
 });
+
+const barberContainer = document.getElementById("barber-container");
+const haircutContainer = document.getElementById("haircut-container");
+
+const barberSelect = document.createElement("select");
+barberSelect.classList.add("form-control");
+barberSelect.id = "barber";
+barberSelect.title = "Selecciona un barbero";
+barberSelect.required = true;
+
+const barberOptions = [
+    "Luis Gonzales",
+    "Daniel Mendez",
+    "Maria Rodriguez",
+    "Carlos Martinez",
+    "Ana Lopez"
+];
+barberOptions.forEach(option => {
+    const optionElement = document.createElement("option");
+    optionElement.value = option;
+    optionElement.textContent = option;
+    barberSelect.appendChild(optionElement);
+});
+
+const haircutSelect = document.createElement("select");
+haircutSelect.classList.add("form-control");
+haircutSelect.id = "haircut";
+haircutSelect.title = "Selecciona un tipo de corte";
+haircutSelect.required = true;
+
+const haircutOptions = [
+    "Corte Pixie",
+    "Corte Bob",
+    "Corte Fade",
+    "Corte Undercut",
+    "Corte Mohawk",
+    "Corte Shag",
+    "Corte Taper",
+    "Corte Long Bob",
+    "Corte de Pelo Rizado",
+    "Corte de Pelo Largo",
+    "Corte de Pelo Corto"
+];
+haircutOptions.forEach(option => {
+    const optionElement = document.createElement("option");
+    optionElement.value = option;
+    optionElement.textContent = option;
+    haircutSelect.appendChild(optionElement);
+});
+
+
+barberContainer.appendChild(barberSelect);
+haircutContainer.appendChild(haircutSelect);
 

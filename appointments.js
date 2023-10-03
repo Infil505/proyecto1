@@ -1,15 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     const appointmentsTableBody = document.querySelector("#appointments-table tbody");
-
-    // Función para cargar y mostrar las citas agendadas desde el localStorage
     function loadAppointments() {
-        // Obtener las citas agendadas desde el localStorage
+        console.log("Cargando citas desde el localStorage...");
         const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
-
-        // Limpiar el cuerpo de la tabla antes de mostrar los nuevos datos
-        appointmentsTableBody.innerHTML = "";
-
-        // Mostrar las citas agendadas en la tabla
+                appointmentsTableBody.innerHTML = "";
         storedAppointments.forEach(appointment => {
             const row = document.createElement("tr");
             row.innerHTML = `
@@ -19,9 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 <td>${appointment.appointmentDate}</td>
             `;
             appointmentsTableBody.appendChild(row);
+            console.log("Nombre del Cliente:", appointment.customerName);
+            console.log("Barbero:", appointment.barber);
+            console.log("Tipo de Corte:", appointment.haircut);
+            console.log("Fecha de la Cita:", appointment.appointmentDate);
         });
+        console.log("Citas cargadas y mostradas en la tabla.");
     }
 
-    // Cargar y mostrar las citas agendadas al cargar la página
     loadAppointments();
 });
