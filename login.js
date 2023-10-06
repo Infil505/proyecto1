@@ -2,9 +2,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const usersDB = JSON.parse(localStorage.getItem("users")) || [];
     const loginForm = document.getElementById("login-form");
     const navButtons = document.querySelectorAll("nav ul li:not(:nth-child(2))");
+    const errorMessage = document.getElementById("error-message"); // Obtén el elemento del mensaje de error
+
     navButtons.forEach(button => {
         button.style.display = "none";
     });
+
     loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const username = document.getElementById("username").value;
@@ -25,12 +28,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 localStorage.setItem("currentUser", JSON.stringify(userData));
                 window.location.href = "index.html";
             } else {
-                console.log("Contraseña incorrecta. Intente nuevamente.");
+                errorMessage.textContent = "Contraseña incorrecta. Intente nuevamente."; // Actualiza el mensaje de error
             }
         } else {
-            console.log("El usuario no existe. Regístrese primero.");
+            errorMessage.textContent = "El usuario no existe. Regístrese primero."; // Actualiza el mensaje de error
         }
     });
+
     const restrictedPages = ["page1.html", "page2.html"];
     const currentPage = window.location.href.split("/").slice(-1)[0];
     if (restrictedPages.includes(currentPage)) {
@@ -43,5 +47,6 @@ document.addEventListener("DOMContentLoaded", function () {
         const userRole = userData.role;
     }
 });
+
 
 
