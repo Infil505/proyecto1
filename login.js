@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         button.style.display = "none";
     });
 
+
     loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const username = document.getElementById("username").value;
@@ -35,10 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Verificar si el usuario tiene el rol de "empleado" para mostrar el enlace a la página de usuarios
-    const usersLink = document.getElementById("users-link");
-    const userDataString = localStorage.getItem("currentUser");
-    if (userDataString) {
+    const restrictedPages = ["page1.html", "page2.html"];
+    const currentPage = window.location.href.split("/").slice(-1)[0];
+    if (restrictedPages.includes(currentPage)) {
+        const userDataString = localStorage.getItem("currentUser");
+        if (!userDataString) {
+            console.log("Usuario no encontrado. Acceso no autorizado a esta página.");
+            window.location.href = "index.html";
+        }
         const userData = JSON.parse(userDataString);
         if (userData.role === "empleado") {
             if (usersLink) {
@@ -47,6 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 });
+
 
 
 
