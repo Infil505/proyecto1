@@ -64,7 +64,20 @@ document.addEventListener("DOMContentLoaded", function () {
     ]);
     barberContainer.appendChild(barberSelect);
     haircutContainer.appendChild(haircutSelect);
+
+    // Obtener el objeto de usuario actual del almacenamiento local
+    const userDataString = localStorage.getItem("currentUser");
+    const userData = userDataString ? JSON.parse(userDataString) : null;
+
+    // Verificar si el usuario tiene el rol de "empleado" para mostrar el enlace a la página de usuarios
+    const usersLink = document.getElementById("users-link");
+    if (userData && userData.role === "empleado") {
+        if (usersLink) {
+            usersLink.style.display = "block";
+        }
+    }
 });
+
 function createSelect(id, title, required, optionsArray) {
     const select = document.createElement("select");
     select.classList.add("form-control");

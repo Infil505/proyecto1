@@ -15,7 +15,9 @@
             <li><a href="register.html">Registro de Usuario</a></li>
             <li><a href="appointment.html">Agendar Cita</a></li>
             <li><a href="appointments.html">Desplegar citas</a></li>
-            <li><a href="login.html">Cerrar sesion</a></li>
+            <!-- Agregamos un botón para la página de usuarios solo si el rol es "empleado" -->
+            <li id="users-link" style="display: none;"><a href="appointmentsUsers.html">Usuarios</a></li>
+            <li><a href="login.html">Cerrar sesión</a></li>
         </ul>
     </nav>
     <br>
@@ -31,9 +33,10 @@
     <div class="login-container">
         <h2>Iniciar Sesión</h2>
         <form id="login-form">
-            <input  type="text" id="username" placeholder="Usuario" required>
-            <input  type="password" id="password" placeholder="Contraseña" required>
-            <button href="index.html" type="submit">Iniciar Sesión</button>
+            <input type="text" id="username" placeholder="Usuario" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <button type="submit">Iniciar Sesión</button>
+            <p id="error-message" style="color: red;"></p>
         </form>
     </div>
 </center>

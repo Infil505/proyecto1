@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="stylesApp.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/x-icon" href="img/42527barberpole_98947.png">
-    <title>Citas</title>
+    <title>Usuarios</title>
     <style>
         /* Estilos para el botón de eliminar */
         #delete-button {
@@ -29,13 +29,13 @@
         }
 
         /* Estilos adicionales */
-        .appointments-container {
+        .users-container {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
-        #appointments-table {
+        #users-table {
             background-color: rgba(254, 254, 254, 0.8);
         }
     </style>
@@ -47,29 +47,36 @@
             <li><a href="appointment.html">Agendar Cita</a></li>
             <li><a href="appointments.html">Desplegar citas</a></li>
             <!-- Agregamos un botón para la página de usuarios solo si el rol es "empleado" -->
-            <li id="users-link" style="display: none;"><a href="appointmentsUsers.html">Usuarios</a></li>
+            <li id="users-link" style="display: none;"><a href="users.html">Usuarios</a></li>
             <li><a href="login.html">Cerrar sesión</a></li>
         </ul>
     </nav>
-    <div class="appointments-container">
+    <div class="users-container">
         <br>
-        <h1><center>Citas</center></h1>
+        <h1><center>Usuarios</center></h1>
         <button id="delete-button">Eliminar</button>
-        <table id="appointments-table">
+        <div>
+            <label for="role-filter">Filtrar por rol:</label>
+            <select id="role-filter">
+                <option value="todos">Todos</option>
+                <option value="empleado">Empleado</option>
+                <option value="cliente">Cliente</option>
+            </select>
+        </div>
+        <table id="users-table">
             <thead>
                 <tr>
-                    <th>Cliente</th>
-                    <th>Barbero</th>
-                    <th>Corte</th>
-                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Rol</th>
+                    <th>Correo</th>
                     <th>Seleccionar</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Las citas agendadas se mostrarán aquí -->
+                <!-- Los usuarios se mostrarán aquí -->
             </tbody>
         </table>
     </div>
-    <script src="appointments.js"></script>
+    <script src="appointmentsUsers.js"></script>
 </body>
 </html>
