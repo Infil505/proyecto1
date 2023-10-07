@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let filteredUsers = storedUsers; // Inicialmente, mostrar todos los usuarios
 
         if (roleFilter.value === "empleado") {
-            filteredUsers = storedUsers.filter(user => user.role === "empleado");
+            filteredUsers = storedUsers.filter(user => user.userType === "empleado");
         } else if (roleFilter.value === "cliente") {
-            filteredUsers = storedUsers.filter(user => user.role === "cliente");
+            filteredUsers = storedUsers.filter(user => user.userType === "usuario");
         }
 
         const rows = filteredUsers.map((user, index) => {
