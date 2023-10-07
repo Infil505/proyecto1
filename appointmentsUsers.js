@@ -3,6 +3,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const deleteButton = document.getElementById("delete-button");
     const roleFilter = document.getElementById("role-filter");
     const usersLink = document.getElementById("users-link"); // Elemento de enlace a la página de usuarios
+    const prevPageButton = document.getElementById("prev-page");
+    const nextPageButton = document.getElementById("next-page");
+    const pageNumber = document.getElementById("page-number");
 
     // Obtener el objeto de usuario actual del almacenamiento local
     const userDataString = localStorage.getItem("currentUser");
@@ -13,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
             usersLink.style.display = "block";
         }
     }
+
+    const itemsPerPage = 5; // Define cuántos usuarios mostrar por página
+    let currentPage = 1;
 
     function loadUsers() {
         console.log("Cargando usuarios desde el localStorage...");
@@ -26,9 +32,13 @@ document.addEventListener("DOMContentLoaded", function () {
             filteredUsers = storedUsers.filter(user => user.userType === "usuario");
         }
 
-        const rows = filteredUsers.map((user, index) => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const usersToDisplay = filteredUsers.slice(startIndex, endIndex);
+
+        const rows = usersToDisplay.map((user, index) => {
             return `
-                <tr data-index="${index}">
+                <tr data-index="${startIndex + index}">
                     <td>${user.username}</td>
                     <td>${user.userType}</td>
                     <td>${user.email}</td>
@@ -38,57 +48,63 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         usersTableBody.innerHTML = rows.join("");
-        console.log("Usuarios cargados y mostrados en la tabla.");
+        pageNumber.textContent = `Página ${currentPage}`;
+
         // Verificar si el usuario tiene el rol de "empleado" antes de mostrar u ocultar el botón de eliminar
         if (userData && userData.role === "empleado") {
             deleteButton.style.display = "block"; // Si es empleado, mostrar el botón
         } else {
             deleteButton.style.display = "none"; // Si no es empleado, ocultar el botón
         }
+
+        // Habilitar o deshabilitar botones de paginación según la página actual
+        if (currentPage === 1) {
+            prevPageButton.disabled = true;
+        } else {
+            prevPageButton.disabled = false;
+        }
+
+        const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+        if (currentPage === totalPages) {
+            nextPageButton.disabled = true;
+        } else {
+            nextPageButton.disabled = false;
+        }
     }
 
     loadUsers();
 
+    // Event listeners para navegación de páginas
+    prevPageButton.addEventListener("click", function () {
+        if (currentPage > 1) {
+            currentPage--;
+            loadUsers();
+        }
+    });
+
+    nextPageButton.addEventListener("click", function () {
+        const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+        let filteredUsers = storedUsers;
+
+        if (roleFilter.value === "empleado") {
+            filteredUsers = storedUsers.filter(user => user.userType === "empleado");
+        } else if (roleFilter.value === "cliente") {
+            filteredUsers = storedUsers.filter(user => user.userType === "usuario");
+        }
+
+        const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            loadUsers();
+        }
+    });
+
     roleFilter.addEventListener("change", function () {
+        currentPage = 1; // Reiniciar a la primera página cuando cambie el filtro
         loadUsers();
     });
 
-    usersTableBody.addEventListener("change", function (e) {
-        const checkboxes = document.querySelectorAll(".select-user");
-        const selectedIndices = [];
-        checkboxes.forEach((checkbox, index) => {
-            if (checkbox.checked) {
-                selectedIndices.push(index);
-            }
-        });
-        if (selectedIndices.length > 0 && userData && userData.role === "empleado") {
-            deleteButton.style.display = "block";
-        } else {
-            deleteButton.style.display = "none";
-        }
-    });
-
-    deleteButton.addEventListener("click", function () {
-        const checkboxes = document.querySelectorAll(".select-user");
-        const selectedIndices = [];
-        checkboxes.forEach((checkbox, index) => {
-            if (checkbox.checked) {
-                selectedIndices.push(index);
-            }
-        });
-        if (selectedIndices.length > 0) {
-            const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
-            selectedIndices.sort((a, b) => b - a);
-            selectedIndices.forEach(index => {
-                storedUsers.splice(index, 1);
-            });
-            localStorage.setItem("users", JSON.stringify(storedUsers));
-            loadUsers();
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            deleteButton.style.display = "none";
-        }
-    });
+    // ...
 });
+
 

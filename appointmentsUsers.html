@@ -38,6 +38,29 @@
         #users-table {
             background-color: rgba(254, 254, 254, 0.8);
         }
+
+        .pagination {
+            margin-top: 20px;
+        }
+
+        .pagination button {
+            margin: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -47,7 +70,7 @@
             <li><a href="appointment.html">Agendar Cita</a></li>
             <li><a href="appointments.html">Desplegar citas</a></li>
             <!-- Agregamos un botón para la página de usuarios solo si el rol es "empleado" -->
-            <li id="users-link" style="display: none;"><a href="users.html">Usuarios</a></li>
+            <li id="users-link" style="display: none;"><a href="appointmentsUsers.html">Usuarios</a></li>
             <li><a href="login.html">Cerrar sesión</a></li>
         </ul>
     </nav>
@@ -76,6 +99,11 @@
                 <!-- Los usuarios se mostrarán aquí -->
             </tbody>
         </table>
+        <div class="pagination">
+            <button id="prev-page">Anterior</button>
+            <span id="page-number">Página 1</span>
+            <button id="next-page">Siguiente</button>
+        </div>
     </div>
     <script src="appointmentsUsers.js"></script>
 </body>
