@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const endIndex = startIndex + itemsPerPage;
         const appointmentsToDisplay = storedAppointments.slice(startIndex, endIndex);
 
-        const rows = appointmentsToDisplay.map((appointment, index) => {
+        const rows = appointmentsToDisplay.map((appointment, index) => {                // uso del map
             return `
                 <tr data-index="${startIndex + index}">
                     <td>${appointment.customerName}</td>
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
             prevPageButton.disabled = false;
         }
 
-        const totalPages = Math.ceil(storedAppointments.length / itemsPerPage);
+        const totalPages = Math.ceil(storedAppointments.length / itemsPerPage);  // limitante de datos por pagina
         if (currentPage === totalPages) {
             nextPageButton.disabled = true;
         } else {
@@ -77,14 +77,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     nextPageButton.addEventListener("click", function () {
         const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
-        const totalPages = Math.ceil(storedAppointments.length / itemsPerPage);
+        const totalPages = Math.ceil(storedAppointments.length / itemsPerPage);            // limitantes por pagina
         if (currentPage < totalPages) {
             currentPage++;
             loadAppointments();
         }
     });
 
-    // Resto del código para eliminar citas, igual que en el código de usuarios...
     appointmentsTableBody.addEventListener("change", function (e) {
         const checkboxes = document.querySelectorAll(".select-appointment");
         const selectedIndices = [];

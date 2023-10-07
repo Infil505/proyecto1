@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const usersDB = JSON.parse(localStorage.getItem("users")) || [];
     const loginForm = document.getElementById("login-form");
     const navButtons = document.querySelectorAll("nav ul li:not(:nth-child(2))");
-    const errorMessage = document.getElementById("error-message"); // Obtén el elemento del mensaje de error
+    const errorMessage = document.getElementById("error-message");
 
     navButtons.forEach(button => {
         button.style.display = "none";
@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        const user = usersDB.find(user => user.username === username);
+        const user = usersDB.find(user => user.username === username);                    // uso del find para verificar que exista el nombre usuario
         if (user) {
-            if (user.password === password) {
+            if (user.password === password) {           // validacion del password 
                 console.log("Inicio de sesión exitoso.");
                 loginForm.reset();
                 navButtons.forEach(button => {
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     username: username,
                     role: user.userType 
                 };
-                localStorage.setItem("currentUser", JSON.stringify(userData));
+                localStorage.setItem("currentUser", JSON.stringify(userData));   // redirige a otra pagina  y guarda el usuario que esta iniciado sesion 
                 window.location.href = "index.html";
             } else {
                 errorMessage.textContent = "Contraseña incorrecta. Intente nuevamente."; // Actualiza el mensaje de error

@@ -22,14 +22,14 @@ document.addEventListener("DOMContentLoaded", function () {
         let filteredUsers = storedUsers; // Inicialmente, mostrar todos los usuarios
 
         if (roleFilter.value === "empleado") {
-            filteredUsers = storedUsers.filter(user => user.userType === "empleado");
+            filteredUsers = storedUsers.filter(user => user.userType === "empleado");     // uso del filter 
         } else if (roleFilter.value === "cliente") {
             filteredUsers = storedUsers.filter(user => user.userType === "usuario");
         }
 
         // Limitar la cantidad de usuarios mostrados
         const maxUsersToShow = 10; // Cambia esto al número deseado
-        filteredUsers = filteredUsers.slice(0, maxUsersToShow);
+        filteredUsers = filteredUsers.slice(0, maxUsersToShow);              
 
         const rows = filteredUsers.map((user, index) => {
             return `
