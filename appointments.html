@@ -38,6 +38,32 @@
         #appointments-table {
             background-color: rgba(254, 254, 254, 0.8);
         }
+
+        .pagination {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .pagination button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .pagination button:hover {
+            background-color: #0056b3;
+        }
+
+        .pagination button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -69,6 +95,11 @@
                 <!-- Las citas agendadas se mostrarán aquí -->
             </tbody>
         </table>
+        <div class="pagination">
+            <button id="prev-page">Anterior</button>
+            <span id="page-number">Página 1</span>
+            <button id="next-page">Siguiente</button>
+        </div>
     </div>
     <script src="appointments.js"></script>
 </body>
