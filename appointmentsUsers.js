@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (roleFilter.value === "empleado") {
             filteredUsers = storedUsers.filter(user => user.userType === "empleado");
         } else if (roleFilter.value === "cliente") {
-            filteredUsers = storedUsers.filter(user => user.userType === "cliente");
+            filteredUsers = storedUsers.filter(user => user.userType === "usuario");
         }
 
         const rows = filteredUsers.map((user, index) => {
