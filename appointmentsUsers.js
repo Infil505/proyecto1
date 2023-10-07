@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (roleFilter.value === "empleado") {
             filteredUsers = storedUsers.filter(user => user.userType === "empleado");
         } else if (roleFilter.value === "cliente") {
-            filteredUsers = storedUsers.filter(user => user.userType === "usuario");
+            filteredUsers = storedUsers.filter(user => user.userType === "cliente");
         }
 
         const rows = filteredUsers.map((user, index) => {
@@ -77,12 +77,12 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         if (selectedIndices.length > 0) {
-            const storedUsers = JSON.parse(localStorage.getItem("usersData")) || [];
+            const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
             selectedIndices.sort((a, b) => b - a);
             selectedIndices.forEach(index => {
                 storedUsers.splice(index, 1);
             });
-            localStorage.setItem("usersData", JSON.stringify(storedUsers));
+            localStorage.setItem("users", JSON.stringify(storedUsers));
             loadUsers();
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false;
@@ -91,3 +91,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
