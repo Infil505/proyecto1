@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const appointmentsTableBody = document.querySelector("#appointments-table tbody");
     const deleteButton = document.getElementById("delete-button");
-    const usersLink = document.getElementById("users-link"); // Elemento de enlace a la página de usuarios
+    const usersLink = document.getElementById("users-link");
     const prevPageButton = document.getElementById("prev-page");
     const nextPageButton = document.getElementById("next-page");
     const pageNumber = document.getElementById("page-number");
@@ -19,14 +19,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const itemsPerPage = 5; // Define cuántas citas mostrar por página
     let currentPage = 1;
+    let futureAppointments = []; // Array para almacenar citas futuras
 
     function loadAppointments() {
         console.log("Cargando citas desde el localStorage...");
         const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
 
+        // Filtrar citas futuras
+        const currentDate = new Date();
+        futureAppointments = storedAppointments.filter(appointment => {
+            const appointmentDate = new Date(appointment.appointmentDate);
+            return appointmentDate >= currentDate;
+        });
+
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
-        const appointmentsToDisplay = storedAppointments.slice(startIndex, endIndex);
+        const appointmentsToDisplay = futureAppointments.slice(startIndex, endIndex);
 
         const rows = appointmentsToDisplay.map((appointment, index) => {
             return `
@@ -57,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
             prevPageButton.disabled = false;
         }
 
-        const totalPages = Math.ceil(storedAppointments.length / itemsPerPage);
+        const totalPages = Math.ceil(futureAppointments.length / itemsPerPage);  // limitante de datos por página
         if (currentPage === totalPages) {
             nextPageButton.disabled = true;
         } else {
@@ -76,15 +84,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextPageButton.addEventListener("click", function () {
-        const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
-        const totalPages = Math.ceil(storedAppointments.length / itemsPerPage);
+        const totalPages = Math.ceil(futureAppointments.length / itemsPerPage);            // limitantes por página
         if (currentPage < totalPages) {
             currentPage++;
             loadAppointments();
         }
     });
 
-    // Resto del código para eliminar citas, igual que en el código de usuarios...
     appointmentsTableBody.addEventListener("change", function (e) {
         const checkboxes = document.querySelectorAll(".select-appointment");
         const selectedIndices = [];
@@ -109,17 +115,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
         if (selectedIndices.length > 0) {
-            const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
-            selectedIndices.sort((a, b) => b - a);
             selectedIndices.forEach(index => {
-                storedAppointments.splice(index, 1);
+                // Calcula el índice en futureAppointments usando startIndex
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const futureIndex = startIndex + index;
+                futureAppointments.splice(futureIndex, 1);
             });
-            localStorage.setItem("appointments", JSON.stringify(storedAppointments));
+            // Actualiza el almacenamiento local con las citas futuras actualizadas
+            localStorage.setItem("appointments", JSON.stringify(futureAppointments));
             loadAppointments();
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = false;
-            });
-            deleteButton.style.display = "none";
         }
     });
 });

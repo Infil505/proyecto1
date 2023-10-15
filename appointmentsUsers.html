@@ -8,7 +8,6 @@
     <link rel="icon" type="image/x-icon" href="img/42527barberpole_98947.png">
     <title>Usuarios</title>
     <style>
-        /* Estilos para el botón de eliminar */
         #delete-button {
             background-color: crimson;
             color: blanchedalmond;
@@ -17,18 +16,12 @@
             padding: 10px 20px;
             cursor: pointer;
         }
-
-        /* Estilos para el botón de eliminar al pasar el ratón sobre él */
         #delete-button:hover {
             background-color: darkred;
         }
-
-        /* Estilos para el botón de eliminar al hacer clic */
         #delete-button:active {
             background-color: firebrick;
         }
-
-        /* Estilos adicionales */
         .users-container {
             display: flex;
             flex-direction: column;
@@ -69,7 +62,6 @@
             <li><a href="index.html">Inicio</a></li>
             <li><a href="appointment.html">Agendar Cita</a></li>
             <li><a href="appointments.html">Desplegar citas</a></li>
-            <!-- Agregamos un botón para la página de usuarios solo si el rol es "empleado" -->
             <li id="users-link" style="display: none;"><a href="appointmentsUsers.html">Usuarios</a></li>
             <li><a href="login.html">Cerrar sesión</a></li>
         </ul>
@@ -99,7 +91,6 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Los usuarios se mostrarán aquí -->
             </tbody>
         </table>
         <div class="pagination">

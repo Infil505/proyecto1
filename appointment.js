@@ -1,23 +1,41 @@
 document.addEventListener("DOMContentLoaded", function () {
     const appointmentForm = document.getElementById("appointment-form");
     const maxAppointmentsPerDay = 8; // Número máximo de citas por día
+
     function getAppointmentsForBarberOnDate(barber, date) {
         return JSON.parse(localStorage.getItem("appointments") || []).filter(appointment => (
             appointment.barber === barber && appointment.appointmentDate === date
         ));
     }
+
     function showAlert(message) {
         alert(message);
     }
+
     function addAppointmentToLocalStorage(appointment) {
         const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
-        storedAppointments.push(appointment);
-        localStorage.setItem("appointments", JSON.stringify(storedAppointments));
+
+        // Verificar si ya existe una cita para el mismo barbero y fecha
+        const appointmentExists = storedAppointments.some(existingAppointment => (             //uso del some
+            existingAppointment.barber === appointment.barber &&
+            existingAppointment.appointmentDate === appointment.appointmentDate
+        ));
+
+        if (appointmentExists) {
+            showAlert('Ya existe una cita para este barbero en la misma fecha. Por favor, elige otra fecha u otro barbero.');
+        } else {
+            storedAppointments.push(appointment);
+            localStorage.setItem("appointments", JSON.stringify(storedAppointments));
+            showAlert('Cita agendada con éxito. ¡Gracias!');
+            window.location.href = "appointments.html";
+        }
     }
+
     function isDateValid(selectedDate) {
         const currentDate = new Date();
         return selectedDate >= currentDate;
     }
+
     appointmentForm.addEventListener("submit", function (e) {
         e.preventDefault();
         const customerName = document.getElementById("customer-name").value;
@@ -25,21 +43,22 @@ document.addEventListener("DOMContentLoaded", function () {
         const haircut = document.getElementById("haircut").value;
         const appointmentDate = document.getElementById("appointment-date").value;
         const selectedDate = new Date(appointmentDate);
+
         if (!isDateValid(selectedDate)) {
             showAlert('No puedes agendar citas en fechas anteriores a la actual.');
         } else {
             const appointmentsForBarberAndDate = getAppointmentsForBarberOnDate(barber, appointmentDate);
+
             if (appointmentsForBarberAndDate.length >= maxAppointmentsPerDay) {
                 showAlert('El barbero ya tiene el máximo de citas para este día. Por favor, elige otra fecha u otro barbero.');
             } else {
                 const appointment = { customerName, barber, haircut, appointmentDate };
                 addAppointmentToLocalStorage(appointment);
                 appointmentForm.reset();
-                showAlert('Cita agendada con éxito. ¡Gracias!');
-                window.location.href = "appointments.html";
             }
         }
     });
+
     const barberContainer = document.getElementById("barber-container");
     const haircutContainer = document.getElementById("haircut-container");
     const barberSelect = createSelect("barber", "Selecciona un barbero", true, [
