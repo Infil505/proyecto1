@@ -8,6 +8,21 @@
     <title>Iniciar Sesión</title>
     <link rel="icon" type="image/x-icon" href="img/42527barberpole_98947.png">
     <style>
+        .registration-button {
+            background-color: rgb(43, 126, 252);
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 70px;
+            font-size: 16px;
+            cursor: pointer;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .registration-button:hover {
+            background-color: #2eb7e0;
+        }
+
         .login-container {
             max-width: 400px;
             margin: 0 auto;
@@ -48,7 +63,7 @@
     <nav>
         <ul>
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="register.html">Registro de Usuario</a></li>
+            <li><a href="register.html">:p</a></li>
             <li><a href="appointment.html">Agendar Cita</a></li>
             <li><a href="login.html">Cerrar sesión</a></li>
         </ul>
@@ -69,9 +84,10 @@
             <input type="text" id="username" placeholder="Usuario" required>
             <input type="password" id="password" placeholder="Contraseña" required>
             <button type="submit">Iniciar Sesión</button>
+
+            <a id="button" href="register.html" class="registration-button">Registrarse</a>
             <p id="error-message"></p>
         </form>
-        <a href="register.html">Registrarse</a> <!-- Agregado el enlace al formulario de registro -->
     </div>
 </center>
     <script src="login.js"></script>
