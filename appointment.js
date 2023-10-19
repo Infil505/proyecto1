@@ -3,7 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const maxAppointmentsPerDay = 8; // Número máximo de citas por día
 
     function getAppointmentsForBarberOnDate(barber, date) {
-        return JSON.parse(localStorage.getItem("appointments") || []).filter(appointment => (
+        const storedAppointments = JSON.parse(localStorage.getItem("appointments") || "[]");
+
+        if (!Array.isArray(storedAppointments)) {  
+            // Si los datos no son un arreglo válido, inicializa "appointments" como un arreglo vacío
+            localStorage.setItem("appointments", JSON.stringify([]));
+            return [];
+        }
+
+        return storedAppointments.filter(appointment => (
             appointment.barber === barber && appointment.appointmentDate === date
         ));
     }
@@ -12,25 +20,19 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(message);
     }
 
-    function addAppointmentToLocalStorage(appointment) {
-        const storedAppointments = JSON.parse(localStorage.getItem("appointments")) || [];
+    function addAppointmentToLocalStorage(appointment) {  
+        const barberAppointments = getAppointmentsForBarberOnDate(appointment.barber, appointment.appointmentDate);
 
-        // Verificar si ya existe una cita para el mismo barbero y fecha
-        const appointmentExists = storedAppointments.some(existingAppointment => (             //uso del some
-            existingAppointment.barber === appointment.barber &&
-            existingAppointment.appointmentDate === appointment.appointmentDate
-        ));
-
-        if (appointmentExists) {
-            showAlert('Ya existe una cita para este barbero en la misma fecha. Por favor, elige otra fecha u otro barbero.');
+        if (barberAppointments.length >= 8) {
+            showAlert('El barbero ya tiene el máximo de citas para este día. Por favor, elige otra fecha u otro barbero.');
         } else {
+            const storedAppointments = JSON.parse(localStorage.getItem("appointments") || "[]");
             storedAppointments.push(appointment);
             localStorage.setItem("appointments", JSON.stringify(storedAppointments));
             showAlert('Cita agendada con éxito. ¡Gracias!');
             window.location.href = "appointments.html";
         }
     }
-
     function isDateValid(selectedDate) {
         const currentDate = new Date();
         return selectedDate >= currentDate;
