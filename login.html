@@ -7,6 +7,42 @@
     <link rel="stylesheet" href="loginStyles.css">
     <title>Iniciar Sesión</title>
     <link rel="icon" type="image/x-icon" href="img/42527barberpole_98947.png">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .login-container h2 {
+            font-size: 24px;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"],
+        .login-container button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        .login-container a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+        @media (max-width: 768px) {
+            .login-container {
+                max-width: 300px;
+            }
+            .login-container h2 {
+                font-size: 20px;
+            }
+            .login-container input[type="text"],
+            .login-container input[type="password"],
+            .login-container button {
+                margin-bottom: 5px;
+            }
+            .login-container a {
+                margin-top: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -35,6 +71,7 @@
             <button type="submit">Iniciar Sesión</button>
             <p id="error-message" style="color: red;"></p>
         </form>
+        <a href="register.html">Registrarse</a> <!-- Agregado el enlace al formulario de registro -->
     </div>
 </center>
     <script src="login.js"></script>
