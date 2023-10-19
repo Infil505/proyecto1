@@ -7,6 +7,22 @@
     <link rel="stylesheet" href="register.css">
     <title>Registro de Usuario</title>
     <link rel="icon" type="image/x-icon" href="img/42527barberpole_98947.png">
+    <style>
+        body {
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+.registration-container {
+    max-width: 400px; /* Ajusta este valor según tus necesidades */
+    margin: 0 auto; /* Centra el contenedor en la pantalla */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+    </style>
 </head>
 <body>
     <br>
@@ -33,8 +49,8 @@
                     <option value="usuario">Usuario</option>
                     <option value="empleado">Empleado</option>
                 </select>
-                <label class="reg-password" for="reg-password" style="display:none;">Contraseña de Validación:</label>
-                <input type="password" id="reg-password-validation" placeholder="Contraseña de Validación" style="display:none;">
+                <label class="reg-password" for="reg-password">Contraseña de Validación:</label>
+                <input type="password" id="reg-password-validation" placeholder="Contraseña de Validación">
                 <button type="submit">Registrarse</button>
             </form>
         </div>

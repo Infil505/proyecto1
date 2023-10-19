@@ -1,13 +1,15 @@
 /* Estilos generales */
 body {
     background-image: url('img/fondo.jpg');
-    background-size: cover; 
-    background-repeat: no-repeat; 
-    font-family: 'century Gothic', sans-serif ;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    font-family: 'Century Gothic', sans-serif;
     background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
+
 
 nav {
     background-color: #2e3d58; /* Azul medio */
@@ -90,7 +92,7 @@ h1 {
 #registration-form input[type="password"],
 #registration-form input[type="email"],
 #registration-form button {
-    width: 100%;
+    width: 90%;
     padding: 10px;
     margin: 5px 0;
     border: 1px solid #ccc;
