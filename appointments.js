@@ -10,12 +10,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const userDataString = localStorage.getItem("currentUser");
     const userData = userDataString ? JSON.parse(userDataString) : null;
 
-    // Verificar si el usuario tiene el rol de "empleado" para mostrar el enlace a la página de usuarios
-    if (userData && userData.role === "empleado") {
-        if (usersLink) {
-            usersLink.style.display = "block";
-        }
+   // Verificar si el usuario tiene el rol de "empleado" para mostrar el enlace a la página de usuarios
+if (userData && userData.role === "empleado") {
+    if (usersLink) {
+        usersLink.style.display = "block";
     }
+} else {
+    // Si el usuario no es "empleado", ocultar el enlace a la página de usuarios
+    if (usersLink) {
+        usersLink.style.display = "none";
+    }
+}
+
 
     const itemsPerPage = 5; // Define cuántas citas mostrar por página
     let currentPage = 1;

@@ -96,6 +96,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (usersLink) {
             usersLink.style.display = "block";
         }
+    }else{
+        if (usersLink) {
+            usersLink.style.display = "none";
+        }
     }
 });
 

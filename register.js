@@ -18,10 +18,14 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("users", JSON.stringify(usersDB));
     }
 
+    // Ocultar el campo de "Contraseña de Validación" al cargar la página
+    const passwordValidationLabel = document.getElementById("password-validation-label");
+    const passwordValidationInput = document.getElementById("reg-password-validation");
+    passwordValidationLabel.style.display = "none";
+    passwordValidationInput.style.display = "none";
+
     userTypeSelect.addEventListener("change", function () {
         const selectedOption = userTypeSelect.value;
-        const passwordValidationLabel = document.getElementById("reg-password-validation");
-        const passwordValidationInput = document.getElementById("reg-password-validation");
 
         if (selectedOption === "empleado") {
             passwordValidationLabel.style.display = "block";
@@ -29,36 +33,41 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             passwordValidationLabel.style.display = "none";
             passwordValidationInput.style.display = "none";
+
         }
     });
 
-    registrationForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-        const username = document.getElementById("reg-username").value;
-        const passwordField = document.getElementById("reg-password");
-        const password = passwordField.value;
-        const email = document.getElementById("reg-email").value;
-        const userType = userTypeSelect.value;
-        let entered = "";
-
-        if (userType === "empleado") {
-            const passwordValidationInput = document.getElementById("reg-password-validation");
-            entered = passwordValidationInput.value;
-        }
-
-        const userExists = usersDB.map(user => user.username).includes(username);           // uso de includes
-
-        if (userExists) {
-            showAlert("El usuario ya existe. Por favor, elija otro nombre de usuario.");
-        } else if (userType === "empleado" && entered !== hexToString(passHex)) {
-            showAlert('Contraseña de administrador incorrecta. El registro ha fallado.');
-        } else {
-            addUserToDB(username, password, email, userType);
-            showAlert(`Registro exitoso. Ahora puede iniciar sesión como ${userType === "empleado" ? "empleado" : "usuario"}.`);
-            registrationForm.reset();
-            window.location.href = "login.html";
-        }
-    });
+        // Ocultar el campo de "Contraseña de Validación" y el elemento "label" al cargar la página
+        passwordValidationLabel.style.display = "none";
+        passwordValidationInput.style.display = "none";
+    
+        registrationForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const username = document.getElementById("reg-username").value;
+            const passwordField = document.getElementById("reg-password");
+            const password = passwordField.value;
+            const email = document.getElementById("reg-email").value;
+            const userType = userTypeSelect.value;
+            let entered = "";
+    
+            if (userType === "empleado") {
+                const passwordValidationInput = document.getElementById("reg-password-validation");
+                entered = passwordValidationInput.value;
+            }
+    
+            const userExists = usersDB.map(user => user.username).includes(username);
+    
+            if (userExists) {
+                showAlert("El usuario ya existe. Por favor, elija otro nombre de usuario.");
+            } else if (userType === "empleado" && entered !== hexToString(passHex)) {
+                showAlert('Contraseña de administrador incorrecta. El registro ha fallado.');
+            } else {
+                addUserToDB(username, password, email, userType);
+                showAlert(`Registro exitoso. Ahora puede iniciar sesión como ${userType === "empleado" ? "empleado" : "usuario"}.`);
+                registrationForm.reset();
+                window.location.href = "login.html";
+            }
+        });
 
     const passwordField = document.getElementById("reg-password");
     passwordField.addEventListener("focus", function () {
