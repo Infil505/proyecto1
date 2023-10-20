@@ -14,11 +14,11 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function addUserToDB(username, password, email, userType) {
-        usersDB.push({ username, password, email, userType });
+        usersDB.push({ username, password, email, userType });       //push
         localStorage.setItem("users", JSON.stringify(usersDB));
     }
 
-    // Ocultar el campo de "Contraseña de Validación" al cargar la página
+
     const passwordValidationLabel = document.getElementById("password-validation-label");
     const passwordValidationInput = document.getElementById("reg-password-validation");
     passwordValidationLabel.style.display = "none";
@@ -37,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-        // Ocultar el campo de "Contraseña de Validación" y el elemento "label" al cargar la página
         passwordValidationLabel.style.display = "none";
         passwordValidationInput.style.display = "none";
     

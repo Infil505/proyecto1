@@ -57,21 +57,19 @@ if (userData && userData.role === "empleado") {
         appointmentsTableBody.innerHTML = rows.join("");
         pageNumber.textContent = `Página ${currentPage}`;
 
-        // Verificar si el usuario tiene el rol de "empleado" antes de mostrar u ocultar el botón de eliminar
         if (userData && userData.role === "empleado") {
-            deleteButton.style.display = "block"; // Si es empleado, mostrar el botón
+            deleteButton.style.display = "block"; 
         } else {
-            deleteButton.style.display = "none"; // Si no es empleado, ocultar el botón
+            deleteButton.style.display = "none"; 
         }
 
-        // Habilitar o deshabilitar botones de paginación según la página actual
         if (currentPage === 1) {
             prevPageButton.disabled = true;
         } else {
             prevPageButton.disabled = false;
         }
 
-        const totalPages = Math.ceil(futureAppointments.length / itemsPerPage);  // limitante de datos por página
+        const totalPages = Math.ceil(futureAppointments.length / itemsPerPage);  
         if (currentPage === totalPages) {
             nextPageButton.disabled = true;
         } else {
@@ -81,7 +79,6 @@ if (userData && userData.role === "empleado") {
 
     loadAppointments();
 
-    // Event listeners para navegación de páginas
     prevPageButton.addEventListener("click", function () {
         if (currentPage > 1) {
             currentPage--;
@@ -90,7 +87,7 @@ if (userData && userData.role === "empleado") {
     });
 
     nextPageButton.addEventListener("click", function () {
-        const totalPages = Math.ceil(futureAppointments.length / itemsPerPage);            // limitantes por página
+        const totalPages = Math.ceil(futureAppointments.length / itemsPerPage);          
         if (currentPage < totalPages) {
             currentPage++;
             loadAppointments();
@@ -122,12 +119,10 @@ if (userData && userData.role === "empleado") {
         });
         if (selectedIndices.length > 0) {
             selectedIndices.forEach(index => {
-                // Calcula el índice en futureAppointments usando startIndex
                 const startIndex = (currentPage - 1) * itemsPerPage;
                 const futureIndex = startIndex + index;
                 futureAppointments.splice(futureIndex, 1);
             });
-            // Actualiza el almacenamiento local con las citas futuras actualizadas
             localStorage.setItem("appointments", JSON.stringify(futureAppointments));
             loadAppointments();
         }

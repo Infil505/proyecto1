@@ -1,17 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     const appointmentForm = document.getElementById("appointment-form");
-    const maxAppointmentsPerDay = 8; // Número máximo de citas por día
+    const maxAppointmentsPerDay = 8;
 
     function getAppointmentsForBarberOnDate(barber, date) {
         const storedAppointments = JSON.parse(localStorage.getItem("appointments") || "[]");
 
         if (!Array.isArray(storedAppointments)) {  
-            // Si los datos no son un arreglo válido, inicializa "appointments" como un arreglo vacío
             localStorage.setItem("appointments", JSON.stringify([]));
             return [];
         }
 
-        return storedAppointments.filter(appointment => (
+        return storedAppointments.filter(appointment => (    //filter
             appointment.barber === barber && appointment.appointmentDate === date
         ));
     }
@@ -86,11 +85,9 @@ document.addEventListener("DOMContentLoaded", function () {
     barberContainer.appendChild(barberSelect);
     haircutContainer.appendChild(haircutSelect);
 
-    // Obtener el objeto de usuario actual del almacenamiento local
     const userDataString = localStorage.getItem("currentUser");
     const userData = userDataString ? JSON.parse(userDataString) : null;
 
-    // Verificar si el usuario tiene el rol de "empleado" para mostrar el enlace a la página de usuarios
     const usersLink = document.getElementById("users-link");
     if (userData && userData.role === "empleado") {
         if (usersLink) {

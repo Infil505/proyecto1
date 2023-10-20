@@ -12,9 +12,9 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault();
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
-        const user = usersDB.find(user => user.username === username);                    // uso del find para verificar que exista el nombre usuario
+        const user = usersDB.find(user => user.username === username);                    // uso del find 
         if (user) {
-            if (user.password === password) {           // validacion del password 
+            if (user.password === password) {        
                 console.log("Inicio de sesión exitoso.");
                 loginForm.reset();
                 navButtons.forEach(button => {
@@ -25,17 +25,16 @@ document.addEventListener("DOMContentLoaded", function () {
                     username: username,
                     role: user.userType 
                 };
-                localStorage.setItem("currentUser", JSON.stringify(userData));   // redirige a otra pagina  y guarda el usuario que esta iniciado sesion 
+                localStorage.setItem("currentUser", JSON.stringify(userData));   
                 window.location.href = "index.html";
             } else {
-                errorMessage.textContent = "Contraseña incorrecta. Intente nuevamente."; // Actualiza el mensaje de error
+                errorMessage.textContent = "Contraseña incorrecta. Intente nuevamente."; 
             }
         } else {
-            errorMessage.textContent = "El usuario no existe. Regístrese primero."; // Actualiza el mensaje de error
+            errorMessage.textContent = "El usuario no existe. Regístrese primero."; 
         }
     });
 
-    // Verificar si el usuario tiene el rol de "empleado" para mostrar el enlace a la página de usuarios
     const usersLink = document.getElementById("users-link");
     const userDataString = localStorage.getItem("currentUser");
     if (userDataString) {

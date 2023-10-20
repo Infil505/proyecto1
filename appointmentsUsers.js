@@ -2,13 +2,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const usersTableBody = document.querySelector("#users-table tbody");
     const deleteButton = document.getElementById("delete-button");
     const roleFilter = document.getElementById("role-filter");
-    const usersLink = document.getElementById("users-link"); // Elemento de enlace a la página de usuarios
+    const usersLink = document.getElementById("users-link"); 
 
-    // Obtener el objeto de usuario actual del almacenamiento local
     const userDataString = localStorage.getItem("currentUser");
     const userData = userDataString ? JSON.parse(userDataString) : null;
 
-    // Verificar si el usuario tiene el rol de "empleado" para mostrar el enlace a la página de usuarios
     if (userData && userData.role === "empleado") {
         if (usersLink) {
             usersLink.style.display = "block";
@@ -19,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Cargando usuarios desde el localStorage...");
         const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-        let filteredUsers = storedUsers; // Inicialmente, mostrar todos los usuarios
+        let filteredUsers = storedUsers; 
 
         if (roleFilter.value === "empleado") {
             filteredUsers = storedUsers.filter(user => user.userType === "empleado");     // uso del filter 
@@ -27,9 +25,8 @@ document.addEventListener("DOMContentLoaded", function () {
             filteredUsers = storedUsers.filter(user => user.userType === "usuario");
         }
 
-        // Limitar la cantidad de usuarios mostrados
-        const maxUsersToShow = 10; // Cambia esto al número deseado
-        filteredUsers = filteredUsers.slice(0, maxUsersToShow);              
+        const maxUsersToShow = 5; 
+        filteredUsers = filteredUsers.slice(0, maxUsersToShow);                        //slice  
 
         const rows = filteredUsers.map((user, index) => {
             return `
@@ -44,11 +41,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         usersTableBody.innerHTML = rows.join("");
         console.log("Usuarios cargados y mostrados en la tabla.");
-        // Verificar si el usuario tiene el rol de "empleado" antes de mostrar u ocultar el botón de eliminar
         if (userData && userData.role === "empleado") {
-            deleteButton.style.display = "block"; // Si es empleado, mostrar el botón
+            deleteButton.style.display = "block"; 
         } else {
-            deleteButton.style.display = "none"; // Si no es empleado, ocultar el botón
+            deleteButton.style.display = "none";
         }
     }
 
